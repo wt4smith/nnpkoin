@@ -181,6 +181,7 @@ template<class Key, class T> bool SwappedMap<Key, T>::open(const std::string& it
   return true;
 }
 
+#include <iostream>
 template<class Key, class T> void SwappedMap<Key, T>::close() {
   std::cout << "SwappedMap cache hits: " << m_cacheHits << ", misses: " << m_cacheMisses << " (" << std::fixed << std::setprecision(2) << static_cast<double>(m_cacheMisses) / (m_cacheHits + m_cacheMisses) * 100 << "%)" << std::endl;
 }
