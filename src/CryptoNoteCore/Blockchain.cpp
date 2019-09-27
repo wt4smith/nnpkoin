@@ -856,7 +856,7 @@ bool Blockchain::validate_miner_transaction(const Block& b, uint32_t height, siz
 
   if (minerReward > reward) {
     logger(ERROR, BRIGHT_RED) << "Coinbase transaction spend too much money: " << m_currency.formatAmount(minerReward) <<
-      ", block reward is " << m_currency.formatAmount(reward);
+    ", block reward is " << m_currency.formatAmount(reward) << " already generated: " <<  m_currency.formatAmount(alreadyGeneratedCoins);
     return false;
   } else if (minerReward < reward) {
     logger(ERROR, BRIGHT_RED) << "Coinbase transaction doesn't use full amount of block reward: spent " <<

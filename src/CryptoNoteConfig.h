@@ -25,6 +25,9 @@ const size_t   BLOCKCHAIN_TIMESTAMP_CHECK_WINDOW             = 60;
 //TODO ((uint64_t)(-1)) equals to 18446744073709551616 coins
 //TODO or you can define number explicitly UINT64_C(858986905600000000)
 const uint64_t MONEY_SUPPLY                                  = (uint64_t)(-1);
+const uint64_t PREMINE_AMOUNT                                = 6456360425798343065; // 35% of supply 
+const char     PREMINE_WALLET[]                              = "3VeBKH8jEP525K4qU6H9fX7HZMhEgmHVLZRxJYHiBaTaGLQc9poDknBFDNi8CoJcucFhvLyff5sZbUA2kBdtwUHTHNevWUA";
+
 const unsigned EMISSION_SPEED_FACTOR                         = 18;
 static_assert(EMISSION_SPEED_FACTOR <= 8 * sizeof(uint64_t), "Bad EMISSION_SPEED_FACTOR");
 
@@ -74,7 +77,8 @@ const char     MINER_CONFIG_FILE_NAME[]                      = "miner_conf.json"
 
 //TODO Put here the name of your currency
 const char     CRYPTONOTE_NAME[]                             = "nnpkoin";
-const char     GENESIS_COINBASE_TX_HEX[]                     = "";
+const char GENESIS_COINBASE_TX_HEX[] = "013c01ff000199b3e6cc99b3e6cc5902905ad9d5f725eb1125eaa285ecae94de9dfc97876fd9b8d607df739e4139de3b21018170e68110058d784d09754a1d5223ca45383e5d372424f3896cbf045728d7e3";
+
 
 const uint8_t  CURRENT_TRANSACTION_VERSION                   =  1;
 const uint8_t  BLOCK_MAJOR_VERSION_1                         =  1;

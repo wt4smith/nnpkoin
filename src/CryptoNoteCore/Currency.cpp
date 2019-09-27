@@ -101,6 +101,11 @@ bool Currency::getBlockReward(size_t medianSize, size_t currentBlockSize, uint64
   assert(alreadyGeneratedCoins <= m_moneySupply);
   assert(m_emissionSpeedFactor > 0 && m_emissionSpeedFactor <= 8 * sizeof(uint64_t));
 
+  if(alreadyGeneratedCoins == 0) {
+     reward = parameters::PREMINE_AMOUNT;
+     return true;
+  }
+
   uint64_t baseReward = (m_moneySupply - alreadyGeneratedCoins) >> m_emissionSpeedFactor;
 
   medianSize = std::max(medianSize, m_blockGrantedFullRewardZone);
@@ -481,11 +486,18 @@ CurrencyBuilder::CurrencyBuilder(Logging::ILogger& log) : m_currency(log) {
   testnet(false);
 }
 
-Transaction CurrencyBuilder::generateGenesisTransaction() {
-  CryptoNote::Transaction tx;
-  CryptoNote::AccountPublicAddress ac = boost::value_initialized<CryptoNote::AccountPublicAddress>();
-  m_currency.constructMinerTx(0, 0, 0, 0, 0, ac, tx); // zero fee in genesis
 
+
+Transaction CurrencyBuilder::generateGenesisTransaction() {
+  Transaction tx;
+  AccountPublicAddress ac;
+  uint64_t prefix;
+  if (!parseAccountAddressString(prefix, ac, parameters::PREMINE_WALLET) || 
+      prefix != parameters::CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX) {
+      throw std::invalid_argument("Invalid wallet address");
+  }
+  if(!m_currency.constructMinerTx(0, 0, 0, 0, 0, ac, tx))
+	  throw std::invalid_argument("Failed to construct tx");
   return tx;
 }
 
