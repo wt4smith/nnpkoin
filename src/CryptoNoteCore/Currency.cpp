@@ -102,6 +102,7 @@ bool Currency::getBlockReward(size_t medianSize, size_t currentBlockSize, uint64
   assert(m_emissionSpeedFactor > 0 && m_emissionSpeedFactor <= 8 * sizeof(uint64_t));
 
   if(alreadyGeneratedCoins == 0) {
+     emissionChange = parameters::PREMINE_AMOUNT;
      reward = parameters::PREMINE_AMOUNT;
      return true;
   }
